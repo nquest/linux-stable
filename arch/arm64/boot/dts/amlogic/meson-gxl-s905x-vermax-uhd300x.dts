@@ -2,7 +2,8 @@
 /*
  * Copyright (c) 2016 Andreas Färber
  * Copyright (c) 2016 BayLibre, Inc.
- * Author: Neil Armstrong <narmstrong@kernel.org>
+ * Copyright (c) 2022 Sergey Moryakov
+ * Author: Sergey Moryakov <sergey@nqnet.org>
  */
 
 /dts-v1/;
@@ -57,11 +58,9 @@
 
 	hdmi_5v: regulator-hdmi-5v {
 		compatible = "regulator-fixed";
-
 		regulator-name = "HDMI_5V";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-
 		gpio = <&gpio GPIOH_3 GPIO_ACTIVE_HIGH>;
 		enable-active-high;
 		regulator-always-on;
@@ -120,8 +119,6 @@
 		VCC-supply = <&hdmi_5v>;
 		enable-gpios = <&gpio GPIOH_5 GPIO_ACTIVE_HIGH>;
 	};
-
-
 
 	sound {
 		compatible = "amlogic,gx-sound-card";
@@ -343,8 +340,8 @@
 		enable-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
 		device-wake-gpios = <&gpio GPIOX_18 GPIO_ACTIVE_HIGH>;
 		max-speed = <1500000>;
-		// clocks = <&wifi32k>;
-		// clock-names = "lpo";
+		clocks = <&wifi32k>;
+		clock-names = "lpo";
 	};
 };
 
