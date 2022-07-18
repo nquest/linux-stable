@@ -65,6 +65,16 @@
 	};
 };
 
+&i2c0 {
+	ctp: ctp@1a {
+	compatible = "hyn,cst226";
+    status = "okay";
+    reg = <0x1a>;
+    irq-gpio = <&pio 1 5 GPIO_ACTIVE_HIGH>; /* PB5 */
+    reset-gpio = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
+	};
+};
+
 &usb_otg {
 	dr_mode = "peripheral";
 };
