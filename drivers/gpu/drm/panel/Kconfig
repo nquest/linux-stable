@@ -123,6 +123,15 @@ config DRM_PANEL_EDP
 	  that it can be automatically turned off when the panel goes into a
 	  low power state.
 
+config DRM_PANEL_DX0960BE40A1
+	tristate "Allwinner DSI dx0960be40a1"
+	depends on OF
+	depends on DRM_MIPI_DSI
+	depends on BACKLIGHT_CLASS_DEVICE
+	help
+	  Say Y here for DX0960BE40A1 1280x800 panel. This panels found ones
+	  Atol Strike POS terminals
+
 config DRM_PANEL_EBBG_FT8719
 	tristate "EBBG FT8719 panel driver"
 	depends on OF
