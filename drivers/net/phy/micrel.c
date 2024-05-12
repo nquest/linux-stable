@@ -2063,6 +2063,7 @@ static int kszphy_probe(struct phy_device *phydev)
 	const struct device_node *np = phydev->mdio.dev.of_node;
 	struct kszphy_priv *priv;
 	struct clk *clk;
+    struct clk *ext_clk;
 
 	priv = devm_kzalloc(&phydev->mdio.dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
@@ -2073,6 +2074,12 @@ static int kszphy_probe(struct phy_device *phydev)
 	priv->type = type;
 
 	kszphy_parse_led_mode(phydev);
+
+    /* Support for external clock input from CPU */
+    ext_clk = devm_clk_get_optional_enabled(&phydev->mdio.dev, "ext-clk");
+	if (IS_ERR(ext_clk))
+		return dev_err_probe(&phydev->mdio.dev, PTR_ERR(ext_clk),
+				     "failed to get phy clock\n");
 
 	clk = devm_clk_get(&phydev->mdio.dev, "rmii-ref");
 	/* NOTE: clk may be NULL if building without CONFIG_HAVE_CLK */
