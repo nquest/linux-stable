@@ -13,6 +13,7 @@
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
+        enable-method = "allwinner,sun8iw20p1";
 
 		cpu0: cpu@0 {
 			compatible = "arm,cortex-a7";
