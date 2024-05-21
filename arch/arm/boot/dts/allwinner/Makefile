@@ -256,6 +256,7 @@ dtb-$(CONFIG_MACH_SUN8I) += \
 	sun8i-t113s-mangopi-mq-r-t113.dtb \
 	sun8i-t113s-wr-netsom.dtb \
 	sun8i-t113s-wr-netsom-1024x600.dtb \
+	sun8i-t113s-wr-netsom-800x480.dtb \
 	sun8i-t3-cqa3t-bv3.dtb \
 	sun8i-v3-sl631-imx179.dtb \
 	sun8i-v3s-licheepi-zero.dtb \
@@ -320,6 +321,7 @@ dtb-$(CONFIG_MACH_SUN8I) += \
 	sun8i-t113s-mangopi-mq-r-t113.dtb \
 	sun8i-t113s-wr-netsom.dtb \
 	sun8i-t113s-wr-netsom-1024x600.dtb \
+	sun8i-t113s-wr-netsom-800x480.dtb \
 	sun8i-t3-cqa3t-bv3.dtb \
 	sun8i-v3-sl631-imx179.dtb \
 	sun8i-v3s-licheepi-zero.dtb \
