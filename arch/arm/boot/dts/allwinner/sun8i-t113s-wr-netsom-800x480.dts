@@ -1,31 +1,18 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 // Copyright (C) 2024 WirelessRoad.
 
-#include <dt-bindings/interrupt-controller/irq.h>
-#include <dt-bindings/gpio/gpio.h>
-
-
 /dts-v1/;
 
-#include "sun8i-t113s.dtsi"
+#include "sun8i-t113s-wr-netsom.dtsi"
 
 / {
 	model = "WR T113 SoM";
 	compatible = "wirelessroad,t113-netsom", "allwinner,sun8i-t113s";
 
-    aliases {
-        ethernet0 = &emac;
-        serial1 = &uart1;
-    };
-
-    chosen {
-        stdout-path = "serial1:115200n8";    
-    };
-
     panel_rgb: panel-rgb {
         compatible = "panel-dpi";
         power-supply = <&reg_vcc3v3>;
-       
+
         port {
           panel_input: endpoint {
             remote-endpoint = <&tcon_lcd0_out_rgb>;
@@ -42,31 +29,6 @@
             vfront-porch = <22>;
             vsync-len = <10>;
         };
-    };
-  
-    reg_vcc5v: regulator-5v {
-        compatible = "regulator-fixed";
-        regulator-name = "vcc-5v";
-        regulator-min-microvolt = <5000000>;
-        regulator-max-microvolt = <5000000>;
-        regulator-always-on;
-    };
-    reg_vcc3v3: regulator-3v3 {
-        compatible = "regulator-fixed";
-        regulator-name = "vcc-3v3";
-        regulator-min-microvolt = <3300000>;
-        regulator-max-microvolt = <3300000>;
-        vin-supply = <&reg_vcc5v>;
-        regulator-always-on;
-    };
-
-    reg_vcc_core: regulator-core {
-        compatible = "regulator-fixed";
-        regulator-name = "vcc-core";
-        regulator-min-microvolt = <880000>;
-        regulator-max-microvolt = <880000>;
-        vin-supply = <&reg_vcc5v>;
-        regulator-always-on;
     };
 };
 
@@ -85,71 +47,6 @@
 
 &de {
     status = "okay";
-};
-
-&cpu0 {
-	cpu-supply = <&reg_vcc_core>;
-    clock-frequency = <1200000000>;
-};
-
-&cpu1 {
-	cpu-supply = <&reg_vcc_core>;
-    clock-frequency = <1200000000>;
-};
-
-&dcxo {
-    clock-frequency = <24000000>;
-};
-
-&ehci1 {
-	status = "okay";
-};
-
-&emac {
-    pinctrl-names = "default";
-    pinctrl-0 = <&rmii_pg_pins>;
-    phy-mode = "rmii";
-    phy-handle = <&ext_rmii_phy>;
-    phy-supply = <&reg_vcc3v3>;
-    status = "okay";
-};
-
-&mdio {
-    ext_rmii_phy: ethernet-phy@0 {
-        compatible = "ethernet-phy-id0022.1561", "ethernet-phy-ieee802.3-c22";
-        clocks = <&ccu CLK_EMAC_25M>;
-        clock-names = "ext-clk";
-        reg = <0>;
-    };
-};
-
-&mmc0 {
-	pinctrl-0 = <&mmc0_pins>;
-	pinctrl-names = "default";
-	vmmc-supply = <&reg_vcc3v3>;
-	non-removable;
-	disable-wp;
-	bus-width = <4>;
-	status = "okay";
-};
-
-&ohci1 {
-	status = "okay";
-};
-
-&pio {
-    vcc-pb-supply = <&reg_vcc3v3>;
-	vcc-pc-supply = <&reg_vcc3v3>;
-	vcc-pd-supply = <&reg_vcc3v3>;
-	vcc-pe-supply = <&reg_vcc3v3>;
-	vcc-pf-supply = <&reg_vcc3v3>;
-	vcc-pg-supply = <&reg_vcc3v3>;
-
-    rmii_pg_pins: rmii-pg-pins {
-        pins = "PG0", "PG1", "PG2", "PG3", "PG4",
-                        "PG5", "PG11", "PG12", "PG13", "PG14", "PG15";
-        function = "emac";
-    };
 };
 
 &spi0 {
@@ -185,25 +82,4 @@
             };
         };
     };
-};
-
-&uart1 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&uart1_pg6_pins>;
-    status = "okay";
-};
-
-
-&usb_otg {
-	dr_mode = "peripheral";
-	status = "okay";
-};
-
-&usbphy {
-	usb1_vbus-supply = <&reg_vcc5v>;
-	status = "okay";
-};
-
-&wdt {
-    status = "okay";
 };
