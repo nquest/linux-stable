@@ -52,6 +52,15 @@
     clock-frequency = <1200000000>;
 };
 
+
+&can0 {
+    status = "okay";
+};
+
+&can1 {
+    status = "okay";
+};
+
 &dcxo {
     clock-frequency = <24000000>;
 };
