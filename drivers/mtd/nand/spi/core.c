@@ -624,9 +624,7 @@ static int spinand_write_page(struct spinand_device *spinand,
 			   SPINAND_WRITE_INITIAL_DELAY_US,
 			   SPINAND_WRITE_POLL_DELAY_US,
 			   &status);
-	// if (!ret && (status & STATUS_PROG_FAILED))
-  // WARNING! TODO! This is unsafe, bot some flashes raises P-fail bit, but page writte succesfully
-  if (ret)
+	if (!ret && (status & STATUS_PROG_FAILED))
 		return -EIO;
 
 	return nand_ecc_finish_io_req(nand, (struct nand_page_io_req *)req);
